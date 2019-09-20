@@ -49,10 +49,10 @@ for i, value in enumerate (s[0]):
         estimate [i] = float(value)
         candidate[0][i]=True
         cost[i]= int(value)
+        predecessor[i]= 0
     elif int(value) == 0 and i !=0:
         estimate[i]= pinf
         candidate[0][i] = False
-finished = False
 x=0
 i=0
 v = 0
@@ -80,12 +80,11 @@ while not all(reached):
                             candidate[v][y]=True
                             predecessor[y]=v  
             j+=1
-        if any(candidate [i]):
-            i=0
-        else:
-            i=b
+        i=b
         i+=1
-    i+=1
+    for x, value in enumerate (cost):
+        if cost[x] > estimate[x]:
+            cost[x] = estimate[x]
 print(max(cost))
 print(cost.index(max(cost)))
 print(max(estimate))
